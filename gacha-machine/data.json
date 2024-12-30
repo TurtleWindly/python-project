@@ -1,0 +1,38 @@
+[
+    {
+        "drop_rate": 0.8,
+        "start": 3,
+        "item_type": 1,
+        "name": "Bao"
+    },
+    {
+        "drop_rate": 0.8,
+        "start": 3,
+        "item_type": 1,
+        "name": "Spear"
+    },
+    {
+        "drop_rate": 0.8,
+        "start": 3,
+        "item_type": 1,
+        "name": "Rock-solid"
+    },
+    {
+        "drop_rate": 0.2,
+        "start": 4,
+        "item_type": 2,
+        "name": "Who"
+    },
+    {
+        "drop_rate": 0.1,
+        "start": 5,
+        "item_type": 2,
+        "name": "Diluc"
+    },
+    {
+        "drop_rate": 0.1,
+        "start": 5,
+        "item_type": 2,
+        "name": "Qiqi"
+    }
+]
