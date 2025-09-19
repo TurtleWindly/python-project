@@ -1,0 +1,20 @@
+<HomeScreen>:
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint: 1, 0.1
+        padding: [144, 0]
+        spacing: 80
+
+        Button:
+            text: "Quiz"
+            on_release: root.manager.current = "quiz_screen"
+
+        Button:
+            text: "Settings"
+            font_size: "20sp"
+            on_release:
+                root.manager.current = "setting_screen"
+
+        # ArrowRightButton:
+        #     label_message: "Next"
+        #     on_release: root.start_game()

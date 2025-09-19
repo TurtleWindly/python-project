@@ -1,0 +1,73 @@
+#: kivy 2.0.0
+
+<AnswerButton>
+    is_correct: False
+    halign: "center"
+    valign: "middle"
+    text_size: self.width, None
+    size_hint_x: 1
+    on_texture_size: self.height = self.texture_size[1]
+
+<QuizBox>
+    orientation: "vertical"
+
+    # Label hiển thị câu hỏi
+    question_label: question_label
+    answer_btn1: answer_btn1
+    answer_btn2: answer_btn2
+    answer_btn3: answer_btn3
+    answer_btn4: answer_btn4
+
+
+    Label:
+        id: question_label
+        text: "Câu hỏi sẽ hiển thị ở đây"
+        size_hint_y: None
+        height: 50
+
+    BoxLayout:
+        orientation: "horizontal"
+
+        AnswerButton:
+            id: answer_btn1
+            text: "Đáp án 1"
+            halign: "center"
+            valign: "middle"
+            text_size: self.width, None
+            size_hint_x: 1
+            on_texture_size: self.height = self.texture_size[1]
+
+        # Đáp án 2
+        AnswerButton:
+            id: answer_btn2
+            text: "Đáp án 2"
+            halign: "center"
+            valign: "middle"
+            text_size: self.width, None
+            size_hint_x: 1
+            on_texture_size: self.height = self.texture_size[1]
+
+    BoxLayout:
+        orientation: "horizontal"
+
+        AnswerButton:
+            id: answer_btn3
+            text: "Đáp án 3"
+            halign: "center"
+            valign: "middle"
+            text_size: self.width, None
+            size_hint_x: 0.5
+            on_texture_size: self.height = self.texture_size[1]
+
+        # Đáp án 4
+        AnswerButton:
+            id: answer_btn4
+            text: "Đáp án 4"
+            halign: "center"
+            valign: "middle"
+            text_size: self.width, None
+            size_hint_x: 0.5
+            on_texture_size: self.height = self.texture_size[1]
+
+<QuizScreen>:
+    QuizBox:
