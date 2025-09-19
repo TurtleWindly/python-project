@@ -10,11 +10,13 @@
             on_release: root.manager.current = "quiz_screen"
 
         Button:
+            text: "Pdf"
+            font_size: "20sp"
+            on_release:
+                root.manager.current = "pdf_screen"
+
+        Button:
             text: "Settings"
             font_size: "20sp"
             on_release:
                 root.manager.current = "setting_screen"
-
-        # ArrowRightButton:
-        #     label_message: "Next"
-        #     on_release: root.start_game()
