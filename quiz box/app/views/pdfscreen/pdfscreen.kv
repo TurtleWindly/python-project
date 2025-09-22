@@ -1,1 +1,20 @@
-<PdfScreen>
+<PdfScreen>:
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            text: "chon file"
+            size_hint_y: None
+            height: '40dp'
+            on_release: root.pick_file()
+
+        ScrollView:
+            do_scroll_x: False
+            GridLayout:
+                id: files_box
+                cols: 2
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: '40dp'
+                row_force_default: True
