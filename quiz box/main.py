@@ -6,6 +6,7 @@ from app.views.homescreen.homescreen import HomeScreen
 from app.views.quizscreen.quizscreen import QuizScreen
 from app.views.pdfscreen.pdfscreen import PdfScreen
 from app.views.settingscreen.settingscreen import SettingScreen
+from app.views.videoscreen.videoscreen import VideoScreen
 
 # Create the manager
 
@@ -17,6 +18,7 @@ class MainApp(App):
         sm.add_widget(SettingScreen())
         sm.add_widget(QuizScreen())
         sm.add_widget(PdfScreen())
+        sm.add_widget(VideoScreen())
         return sm
 
     def on_start(self):
