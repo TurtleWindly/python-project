@@ -1,0 +1,21 @@
+#: kivy 2.0.0
+
+<RegisterScreen>:
+    name_text: name_text
+    unit_text: unit_text
+
+    BoxLayout:
+        orientation: "vertical"
+
+        InputForm:
+            id: name_text
+            label_text: "Tên của bạn:"
+
+        InputForm:
+            id: unit_text
+            label_text: "Đơn vị của bạn:"
+
+        Button:
+            text: "Làm bài kiểm tra"
+            size_hint: 1, 0.2
+            on_release: root.register_user(name_text.text, unit_text.text)
