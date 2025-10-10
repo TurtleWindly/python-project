@@ -14,8 +14,6 @@ with open(json_file, "r", encoding="utf-8") as f:
     questions_data: list[dict] = json.load(f)
 
 
-class QuizScreen(Screen):
-    name = "quiz_screen"
 
 
 class AnswerButton(Button):
@@ -71,14 +69,16 @@ class QuizBox(BoxLayout):
         self.set_question(new_question)
 
 
-class QuizApp(App):
-    def build(self):
-        quiz = QuizBox()
+class QuizScreen(Screen):
+    name = "quiz_screen"
+    quizbox = ObjectProperty(None)
 
-        # Hiển thị câu hỏi đầu tiên
-        quiz.set_question(questions_data[0])
-        quiz.answer_btn1.bind(on_release=lambda btn: quiz.check_answer(btn.is_correct))
-        quiz.answer_btn2.bind(on_release=lambda btn: quiz.check_answer(btn.is_correct))
-        quiz.answer_btn3.bind(on_release=lambda btn: quiz.check_answer(btn.is_correct))
-        quiz.answer_btn4.bind(on_release=lambda btn: quiz.check_answer(btn.is_correct))
-        return quiz
+    def on_enter(self):
+        self.quizbox.set_question(questions_data[0])
+        self.quizbox.answer_btn1.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
+        self.quizbox.answer_btn2.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
+        self.quizbox.answer_btn3.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
+        self.quizbox.answer_btn4.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
+
+class RegisterScreen(Screen):
+    name = "quiz_register_screen"
