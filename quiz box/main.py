@@ -4,7 +4,7 @@ from kivy.app import App
 
 from app.views.homescreen.homescreen import HomeScreen
 from app.views.quizscreen.quizscreen import QuizScreen
-from app.views.quizscreen.quizscreen import RegisterScreen
+from app.views.registerscreen.registerscreen import RegisterScreen
 from app.views.pdfscreen.pdfscreen import PdfScreen
 from app.views.settingscreen.settingscreen import SettingScreen
 from app.views.videoscreen.videoscreen import VideoScreen
