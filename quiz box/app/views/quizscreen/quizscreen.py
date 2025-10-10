@@ -14,8 +14,6 @@ with open(json_file, "r", encoding="utf-8") as f:
     questions_data: list[dict] = json.load(f)
 
 
-
-
 class AnswerButton(Button):
     """Custom Button để lưu thông tin đáp án"""
 
@@ -75,10 +73,15 @@ class QuizScreen(Screen):
 
     def on_enter(self):
         self.quizbox.set_question(questions_data[0])
-        self.quizbox.answer_btn1.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
-        self.quizbox.answer_btn2.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
-        self.quizbox.answer_btn3.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
-        self.quizbox.answer_btn4.bind(on_release=lambda btn: self.quizbox.check_answer(btn.is_correct))
-
-class RegisterScreen(Screen):
-    name = "quiz_register_screen"
+        self.quizbox.answer_btn1.bind(
+            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+        )
+        self.quizbox.answer_btn2.bind(
+            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+        )
+        self.quizbox.answer_btn3.bind(
+            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+        )
+        self.quizbox.answer_btn4.bind(
+            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+        )
