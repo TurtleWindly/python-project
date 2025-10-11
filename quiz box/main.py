@@ -16,6 +16,7 @@ class MainApp(App):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.db = QuizDatabase()
+        self.current_user = None
 
     def build(self):
         sm = ScreenManager()
