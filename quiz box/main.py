@@ -1,5 +1,4 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
-
 from kivy.app import App
 
 from app.views.homescreen.homescreen import HomeScreen
@@ -8,11 +7,16 @@ from app.views.registerscreen.registerscreen import RegisterScreen
 from app.views.pdfscreen.pdfscreen import PdfScreen
 from app.views.settingscreen.settingscreen import SettingScreen
 from app.views.videoscreen.videoscreen import VideoScreen
+from app.database import QuizDatabase
 
 # Create the manager
 
 
 class MainApp(App):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.db = QuizDatabase()
+
     def build(self):
         sm = ScreenManager()
         sm.add_widget(HomeScreen())
@@ -25,6 +29,9 @@ class MainApp(App):
 
     def on_start(self):
         self.root.current = "home_screen"
+
+    def on_stop(self):
+        self.db.close()
 
 
 if __name__ == "__main__":
