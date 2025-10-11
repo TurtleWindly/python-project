@@ -53,10 +53,19 @@ class QuizBox(BoxLayout):
             buttons[index].tag = key
             buttons[index].is_correct = True if key == question["answer"] else False
 
-    def check_answer(self, selected_answer):
+    def check_answer(self, app: App, selected_answer):
         """Hàm kiểm tra đáp án"""
+        app.current_user.score += 1 if selected_answer else 0
+        print(app.current_user.score)
+
+        if app.current_user.score >= 10:
+            print(f"Chúc mừng {app.current_user.name}, bạn đã hoàn thành bài quiz!")
+            result = app.db.add_result(
+                app.current_user.name, app.current_user.unit, app.current_user.score
+            )
+            app.root.current = "result_screen"
+
         if selected_answer:
-            print("Đúng rồi!")
             self.set_question(random.choice(questions_data))
         else:
             print("Sai rồi!")
@@ -71,17 +80,21 @@ class QuizScreen(Screen):
     name = "quiz_screen"
     quizbox = ObjectProperty(None)
 
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.app = App.get_running_app()
+
     def on_enter(self):
         self.quizbox.set_question(questions_data[0])
         self.quizbox.answer_btn1.bind(
-            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
         )
         self.quizbox.answer_btn2.bind(
-            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
         )
         self.quizbox.answer_btn3.bind(
-            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
         )
         self.quizbox.answer_btn4.bind(
-            on_release=lambda btn: self.quizbox.check_answer(btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
         )
