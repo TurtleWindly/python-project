@@ -34,6 +34,13 @@ class QuizDatabase:
         self.conn.commit()
         return cursor.lastrowid
 
+    def get_result_by_id(self, result_id):
+        """Lấy kết quả theo id"""
+        cursor = self.conn.execute(
+            "SELECT * FROM results WHERE id = ?", (result_id,)
+        )
+        return cursor.fetchone()
+
     def get_all_results(self):
         """Lấy toàn bộ dữ liệu"""
         cursor = self.conn.execute("SELECT * FROM results ORDER BY created_date DESC")
