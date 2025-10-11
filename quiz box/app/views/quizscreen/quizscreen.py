@@ -56,9 +56,11 @@ class QuizBox(BoxLayout):
     def check_answer(self, app: App, selected_answer):
         """Hàm kiểm tra đáp án"""
         app.current_user.score += 1 if selected_answer else 0
-        print(app.current_user.score)
+        self.parent.answered_question += 1
+        print("Answered: " + str(self.parent.answered_question))
+        print("Score: " + str(app.current_user.score))
 
-        if app.current_user.score >= 10:
+        if self.parent.answered_question >= app.settings.max_question:
             print(f"Chúc mừng {app.current_user.name}, bạn đã hoàn thành bài quiz!")
             result = app.db.add_result(
                 app.current_user.name, app.current_user.unit, app.current_user.score
@@ -68,7 +70,9 @@ class QuizBox(BoxLayout):
         if selected_answer:
             self.set_question(random.choice(questions_data))
         else:
+            # TODO: Popup thông báo sai 1s rồi tự đóng
             print("Sai rồi!")
+            self.set_question(random.choice(questions_data))
 
     def reset_quiz(self):
         """Hàm đặt lại câu hỏi mới"""
@@ -79,6 +83,7 @@ class QuizBox(BoxLayout):
 class QuizScreen(Screen):
     name = "quiz_screen"
     quizbox = ObjectProperty(None)
+    answered_question = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
