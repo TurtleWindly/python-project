@@ -22,14 +22,17 @@ class QuizDatabase:
         self.conn.execute(query)
         self.conn.commit()
 
-    def add_result(self, name, unit, score):
-        """Thêm một kết quả mới"""
+    # Viết cho tôi document về các tham số và kiểu trả về
+
+    def add_result(self, name, unit, score) -> int:
+        """Thêm kết quả mới và trả về id của bản ghi"""
         created_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         query = (
             "INSERT INTO results (name, unit, score, created_date) VALUES (?, ?, ?, ?)"
         )
-        self.conn.execute(query, (name, unit, score, created_date))
+        cursor = self.conn.execute(query, (name, unit, score, created_date))
         self.conn.commit()
+        return cursor.lastrowid
 
     def get_all_results(self):
         """Lấy toàn bộ dữ liệu"""
