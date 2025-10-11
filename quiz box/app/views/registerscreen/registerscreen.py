@@ -2,7 +2,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 
-from main import User
+from app.user import User
 
 
 class RegisterScreen(Screen):
