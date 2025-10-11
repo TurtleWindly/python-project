@@ -2,6 +2,8 @@ from kivy.app import App
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 
+from main import User
+
 
 class RegisterScreen(Screen):
     name = "quiz_register_screen"
@@ -27,7 +29,5 @@ class RegisterScreen(Screen):
             # TODO: Create a popup to inform the user
             return
 
-        user_data = {"name": name, "unit": unit, "score": 0}
-            # do something with user_data, e.g. save or switch screen
-        app.current_user = app.db.add_result(name, unit, 0)
+        app.current_user = User(name=name, unit=unit, score=0)
         self.manager.current = "quiz_screen"

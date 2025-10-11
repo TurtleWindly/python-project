@@ -9,9 +9,13 @@ from app.views.settingscreen.settingscreen import SettingScreen
 from app.views.videoscreen.videoscreen import VideoScreen
 from app.database import QuizDatabase
 
-# Create the manager
+class User:
+    def __init__(self, name: str, unit: str, score: int = 0):
+        self.name = name
+        self.unit = unit
+        self.score = score
 
-
+# Create the manage
 class MainApp(App):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
