@@ -11,6 +11,7 @@ from app.views.videoscreen.videoscreen import VideoScreen
 from app.database import QuizDatabase
 
 from app.user import User
+from app.setting import AppSettings
 
 
 # Create the manage
@@ -18,6 +19,7 @@ class MainApp(App):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.db = QuizDatabase()
+        self.settings = AppSettings()
         self.current_user = User("", "")
 
     def build(self):
