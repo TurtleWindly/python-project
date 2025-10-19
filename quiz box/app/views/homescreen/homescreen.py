@@ -1,5 +1,5 @@
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 
 
-class HomeScreen(Screen):
+class HomeScreen(MDScreen):
     name = "home_screen"

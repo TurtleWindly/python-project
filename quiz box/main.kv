@@ -9,5 +9,31 @@
 #: include app/views/registerscreen/registerscreen.kv
 #: include app/views/resultscreen/resultscreen.kv
 
-ScreenManager:
-    id: screen_manager
+MDScreen:
+    orientation: 'vertical'
+
+    MDBottomNavigation:
+
+        MDBottomNavigationItem:
+            name: "home_tab"
+            text: "Home"
+            icon: "home"
+
+            HomeScreen:
+                id: home_screen
+
+        MDBottomNavigationItem:
+            name: "quiz_register_tab"
+            text: "Quiz"
+            icon: "clipboard-text"
+
+            RegisterScreen:
+                id: register_screen
+
+        MDBottomNavigationItem:
+            name: "video_tab"
+            text: "Videos"
+            icon: "video"
+
+            VideoScreen:
+                id: video_screen

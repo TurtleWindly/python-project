@@ -6,14 +6,14 @@ from pathlib import Path
 from kivy.uix.image import Image
 from kivy.uix.boxlayout import BoxLayout
 from kivy.graphics.texture import Texture
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 
 VIDEO_FOLDER = Path.cwd() / "res" / "videos"
 
 
-class VideoScreen(Screen):
+class VideoScreen(MDScreen):
     """Màn hình hiển thị danh sách các video"""
 
     name = "video_screen"

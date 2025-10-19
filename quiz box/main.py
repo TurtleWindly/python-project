@@ -1,5 +1,6 @@
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.app import App
+from kivymd.uix.screenmanager import MDScreenManager
+from kivymd.uix.screen import MDScreen
+from kivymd.app import MDApp
 
 from app.views.homescreen.homescreen import HomeScreen
 from app.views.registerscreen.registerscreen import RegisterScreen
@@ -15,23 +16,13 @@ from app.setting import AppSettings
 
 
 # Create the manage
-class MainApp(App):
+class MainApp(MDApp):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.db = QuizDatabase()
         self.settings = AppSettings()
         self.current_user = User("", "")
-
-    def build(self):
-        sm = ScreenManager()
-        sm.add_widget(HomeScreen())
-        sm.add_widget(SettingScreen())
-        sm.add_widget(RegisterScreen())
-        sm.add_widget(ResultScreen())
-        sm.add_widget(QuizScreen())
-        sm.add_widget(PdfScreen())
-        sm.add_widget(VideoScreen())
-        return sm
+        self.root = MDScreenManager()
 
     def on_start(self):
         self.root.current = "home_screen"

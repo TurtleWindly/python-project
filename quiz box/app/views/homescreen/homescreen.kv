@@ -1,28 +1,5 @@
 <HomeScreen>:
-    BoxLayout:
-        orientation: "horizontal"
-        size_hint: 1, 0.1
-        padding: [144, 0]
-        spacing: 80
-
-        Button:
-            text: "Quiz"
-            on_release: root.manager.current = "quiz_register_screen"
-
-        Button:
-            text: "Pdf"
-            font_size: "20sp"
-            on_release:
-                root.manager.current = "pdf_screen"
-
-        Button:
-            text: "Video"
-            font_size: "20sp"
-            on_release:
-                root.manager.current = "video_screen"
-
-        Button:
-            text: "Settings"
-            font_size: "20sp"
-            on_release:
-                root.manager.current = "setting_screen"
+    MDLabel:
+        text: "Ứng dụng chính trị"
+        halign: "center"
+        theme_text_color: "Primary"
