@@ -1,5 +1,35 @@
 <HomeScreen>:
-    MDLabel:
-        text: "Ứng dụng chính trị"
-        halign: "center"
-        theme_text_color: "Primary"
+
+    MDList:
+        id: menu_list
+        size_hint_y: None
+        height: self.minimum_height
+        pos_hint: {"top": 1}
+
+        OneLineAvatarListItem:
+            text: "Bài Quiz"
+            on_release:
+                app.root.ids.screen_manager.current = "quiz_register_screen"
+            IconLeftWidget:
+                icon: "clipboard-text-multiple-outline"
+
+        OneLineAvatarListItem:
+            text: "Tài liệu PDF"
+            on_release:
+                app.root.ids.screen_manager.current = "pdf_screen"
+            IconLeftWidget:
+                icon: "file-pdf-box"
+
+        OneLineAvatarListItem:
+            text: "Video"
+            on_release:
+                app.root.ids.screen_manager.current = "video_screen"
+            IconLeftWidget:
+                icon: "video"
+
+        OneLineAvatarListItem:
+            text: "Cài đặt"
+            on_release:
+                app.root.ids.screen_manager.current = "setting_screen"
+            IconLeftWidget:
+                icon: "cog"
