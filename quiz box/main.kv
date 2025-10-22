@@ -9,8 +9,15 @@
 #: include app/views/registerscreen/registerscreen.kv
 #: include app/views/resultscreen/resultscreen.kv
 
-MDScreen:
-    orientation: 'vertical'
+MDBoxLayout:
+    orientation: "vertical"
+
+    MDTopAppBar:
+        id: top_bar
+        title: "Quiz App"
+        elevation: 6
+        left_action_items: [["arrow-left", lambda x: app.go_back()]]
+        md_bg_color: app.theme_cls.primary_color
 
     MDScreenManager:
         id: screen_manager
@@ -26,3 +33,15 @@ MDScreen:
         SettingScreen:
             id: setting_screen
             name: "setting_screen"
+
+        PdfScreen:
+            id: pdf_screen
+            name: "pdf_screen"
+
+        RegisterScreen:
+            id: quiz_register_screen
+            name: "quiz_register_screen"
+
+        QuizScreen:
+            id: quiz_screen
+            name: "quiz_screen"
