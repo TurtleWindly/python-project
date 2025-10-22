@@ -1,0 +1,74 @@
+# Định nghĩa nội dung cho các màn hình
+# Lưu ý: Tên quy tắc <Screen1>, <Screen2>, <Screen3> phải khớp
+# với tên Lớp (Class) đã định nghĩa trong file main.py
+
+<Screen1>:
+    MDLabel:
+        text: "Đây là Màn hình 1 (Home)"
+        halign: "center"
+
+<Screen2>:
+    MDLabel:
+        text: "Đây là Màn hình 2 (Explore)"
+        halign: "center"
+
+<Screen3>:
+    MDLabel:
+        text: "Đây là Màn hình 3 (Profile)"
+        halign: "center"
+
+
+# Quy tắc cho Màn hình chính (Root Widget)
+# Đây là quy tắc sẽ được tải bởi Builder.load_file("main.kv")
+<MainScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # ScreenManager chịu trách nhiệm quản lý và chuyển đổi các màn hình
+        ScreenManager:
+            id: screen_manager
+
+            # Thêm các màn hình vào ScreenManager
+            # Thuộc tính 'name' RẤT QUAN TRỌNG.
+            # Nó phải khớp với thuộc tính 'name' của MDNavigationItem
+            Screen1:
+                name: "scr_1_home"
+
+            Screen2:
+                name: "scr_2_explore"
+
+            Screen3:
+                name: "scr_3_profile"
+
+        # Thanh điều hướng ở dưới cùng
+        MDNavigationBar:
+            id: nav_bar
+            # Đây là kết nối quan trọng:
+            # Khi một mục được chọn (on_item_select),
+            # nó sẽ gọi hàm 'on_item_select' của MainScreen (root).
+            on_item_select: root.on_item_select(*args)
+
+            MDNavigationItem:
+                # Tên này phải khớp với 'name' của MDScreen ở trên
+                name: "scr_1_home"
+                text: "Home"
+                icon: "home"
+                # (Tùy chọn) Thêm thông báo
+                # MDBadge:
+                #    text: "99+"
+
+            MDNavigationItem:
+                # Tên này phải khớp với 'name' của MDScreen ở trên
+                name: "scr_2_explore"
+                text: "Explore"
+                icon: "compass"
+
+            MDNavigationItem:
+                # Tên này phải khớp với 'name' của MDScreen ở trên
+                name: "scr_3_profile"
+                text: "Profile"
+                icon: "account"
+
+
+# Quy tắc cuối cùng này đảm bảo MainScreen là widget gốc được trả về
+MainScreen:
