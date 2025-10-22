@@ -12,28 +12,17 @@
 MDScreen:
     orientation: 'vertical'
 
-    MDBottomNavigation:
+    MDScreenManager:
+        id: screen_manager
 
-        MDBottomNavigationItem:
-            name: "home_tab"
-            text: "Home"
-            icon: "home"
+        HomeScreen:
+            id: home_screen
+            name: "home_screen"
 
-            HomeScreen:
-                id: home_screen
+        VideoScreen:
+            id: video_screen
+            name: "video_screen"
 
-        MDBottomNavigationItem:
-            name: "video_tab"
-            text: "Videos"
-            icon: "video"
-
-            VideoScreen:
-                id: video_screen
-
-        MDBottomNavigationItem:
-            name: "setting_tab"
-            text: "Settings"
-            icon: "cog"
-
-            SettingScreen:
-                id: setting_screen
+        SettingScreen:
+            id: setting_screen
+            name: "setting_screen"
