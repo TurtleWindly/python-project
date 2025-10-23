@@ -65,7 +65,7 @@ class QuizBox(BoxLayout):
             result = app.db.add_result(
                 app.current_user.name, app.current_user.unit, app.current_user.score
             )
-            app.root.current = "result_screen"
+            app.root.ids.screen_manager.current = "result_screen"
 
         if selected_answer:
             self.set_question(random.choice(questions_data))
