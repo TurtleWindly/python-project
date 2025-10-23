@@ -136,6 +136,7 @@ class VideoScreen(MDScreen):
             card.add_widget(img)
             card.add_widget(label)
 
+            # TODO: Replace on touch up with proper button behavior
             def _on_touch_up(inst, touch, vp=video_path):
                 if inst.collide_point(*touch.pos):
                     self.open_file(vp)
