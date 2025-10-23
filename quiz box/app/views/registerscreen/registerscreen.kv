@@ -4,18 +4,35 @@
     name_text: name_text
     unit_text: unit_text
 
-    BoxLayout:
+    MDBoxLayout:
         orientation: "vertical"
 
-        InputForm:
+        MDTextField:
             id: name_text
-            label_text: "Tên của bạn:"
+            hint_text: "Họ và tên"
+            font_size: 32
+            mode: "fill"
 
-        InputForm:
+        MDTextField:
             id: unit_text
-            label_text: "Đơn vị của bạn:"
+            hint_text: "Đơn vị"
+            font_size: 32
+            mode: "fill"
 
-        Button:
-            text: "Làm bài kiểm tra"
-            size_hint: 1, 0.2
+
+        # MDButton:
+        #     text: "Làm bài kiểm tra"
+        #     size_hint: 1, 0.2
+        #     on_release: root.register_user()
+        # MDIconButton:
+        #     icon: "android"
+        #     text: "MDFlatButton"
+        #     theme_text_color: "Custom"
+        #     text_color: "orange"
+        MDRectangleFlatIconButton:
+            text: "xác nhận"
+            icon: "check"
+            pos_hint: {"center_x": 0.5}
+            size_hint: 0.6, None
+            height: dp(48)
             on_release: root.register_user()
