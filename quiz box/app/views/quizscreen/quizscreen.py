@@ -1,9 +1,9 @@
 import json
 import random
-from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.button import MDRectangleFlatButton as Button
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
 number_of_questions = 10
@@ -21,7 +21,7 @@ class AnswerButton(Button):
     tag = StringProperty("")  # Property để lưu nhãn đáp án (A, B, C, D)
 
 
-class QuizBox(BoxLayout):
+class QuizBox(MDBoxLayout):
     # Khai báo property để bind tới button trong KV
     question_label = ObjectProperty(None)
     answer_btn1 = ObjectProperty(None)
@@ -80,14 +80,14 @@ class QuizBox(BoxLayout):
         self.set_question(new_question)
 
 
-class QuizScreen(Screen):
+class QuizScreen(MDScreen):
     name = "quiz_screen"
     quizbox = ObjectProperty(None)
     answered_question = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.app = App.get_running_app()
+        self.app = MDApp.get_running_app()
 
     def on_enter(self):
         self.quizbox.set_question(questions_data[0])
