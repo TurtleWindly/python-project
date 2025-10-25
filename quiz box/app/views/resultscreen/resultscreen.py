@@ -1,10 +1,10 @@
 from kivy.app import App
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty
 
 from app.user import User
 
-class ResultScreen(Screen):
+class ResultScreen(MDScreen):
     name = "result_screen"
     name_label = ObjectProperty(None)
     unit_label = ObjectProperty(None)
