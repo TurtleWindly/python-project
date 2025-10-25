@@ -1,35 +1,30 @@
 <ResultScreen>:
     name: "result_screen"
-    name_label: name_label
-    unit_label: unit_label
     score_label: score_label
+
 
     MDBoxLayout:
         orientation: 'vertical'
         padding: 20
         spacing: 20
 
+        Image:
+            # TODO: Manual scale img
+            source: "res/img/trophy.png"
+
         MDLabel:
             text: "Bạn đã hoàn thành phần thi!"
+            halign: 'center'
             font_size: '24sp'
-            size_hint_y: None
-
-        MDLabel:
-            id: name_label
-            text: ""
-            font_size: '24sp'
-            size_hint_y: None
-
-        MDLabel:
-            id: unit_label
-            text: ""
-            font_size: '24sp'
+            font_name: "res/fonts/Bangers.ttf"
             size_hint_y: None
 
         MDLabel:
             id: score_label
-            text: ""
+            text: "Điểm của bạn: "
+            halign: 'center'
             font_size: '24sp'
+            font_name: "res/fonts/Roboto.ttf"
             size_hint_y: None
 
 
@@ -38,5 +33,6 @@
             icon: "home"
             pos_hint: {"center_x": 0.5}
             height: dp(48)
+            font_name: "res/fonts/Roboto.ttf"
             on_release:
                 app.root.ids.screen_manager.current = 'home_screen'
