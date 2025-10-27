@@ -53,7 +53,7 @@ class QuizBox(MDBoxLayout):
             buttons[index].tag = key
             buttons[index].is_correct = True if key == question["answer"] else False
 
-    def check_answer(self, app: App, selected_answer):
+    def check_answer(self, app: MDApp, selected_answer):
         """Hàm kiểm tra đáp án"""
         app.current_user.score += 1 if selected_answer else 0
         self.parent.answered_question += 1

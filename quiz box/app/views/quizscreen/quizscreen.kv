@@ -3,10 +3,10 @@
 <AnswerButton>
     is_correct: False
     halign: "center"
-    valign: "middle"
-    text_size: self.width, None
+    font_size: "18sp"
     size_hint_x: 1
-    on_texture_size: self.height = self.texture_size[1]
+    # md_bg_color: app.theme_cls.primary_color
+    # text_color: 1, 1, 1, 1
 
 <QuizBox>
     orientation: "vertical"
@@ -19,55 +19,56 @@
     answer_btn4: answer_btn4
 
 
-    Label:
+    MDLabel:
         id: question_label
         text: "Câu hỏi sẽ hiển thị ở đây"
+        font_name: "res/fonts/Roboto.ttf"
+        halign: "center"
         size_hint_y: None
         height: 50
 
-    BoxLayout:
-        orientation: "horizontal"
+    MDBoxLayout:
+        spacing: 20
+        padding: 20
+        orientation: "vertical"
 
-        AnswerButton:
-            id: answer_btn1
-            text: "Đáp án 1"
-            halign: "center"
-            valign: "middle"
-            text_size: self.width, None
-            size_hint_x: 1
-            on_texture_size: self.height = self.texture_size[1]
+        MDBoxLayout:
+            spacing: 20
+            orientation: "horizontal"
 
-        # Đáp án 2
-        AnswerButton:
-            id: answer_btn2
-            text: "Đáp án 2"
-            halign: "center"
-            valign: "middle"
-            text_size: self.width, None
-            size_hint_x: 1
-            on_texture_size: self.height = self.texture_size[1]
+            AnswerButton:
+                id: answer_btn1
+                text: "Đáp án 1"
+                halign: "center"
+                text_size: self.width, None
+                size_hint: (1, 1)
 
-    BoxLayout:
-        orientation: "horizontal"
+            # Đáp án 2
+            AnswerButton:
+                id: answer_btn2
+                text: "Đáp án 2"
+                halign: "center"
+                text_size: self.width, None
+                size_hint: (1, 1)
 
-        AnswerButton:
-            id: answer_btn3
-            text: "Đáp án 3"
-            halign: "center"
-            valign: "middle"
-            text_size: self.width, None
-            size_hint_x: 0.5
-            on_texture_size: self.height = self.texture_size[1]
+        MDBoxLayout:
+            spacing: 20
+            orientation: "horizontal"
 
-        # Đáp án 4
-        AnswerButton:
-            id: answer_btn4
-            text: "Đáp án 4"
-            halign: "center"
-            valign: "middle"
-            text_size: self.width, None
-            size_hint_x: 0.5
-            on_texture_size: self.height = self.texture_size[1]
+            AnswerButton:
+                id: answer_btn3
+                text: "Đáp án 3"
+                halign: "center"
+                text_size: self.width, None
+                size_hint: (1, 1)
+
+            # Đáp án 4
+            AnswerButton:
+                id: answer_btn4
+                text: "Đáp án 4"
+                halign: "center"
+                text_size: self.width, None
+                size_hint: (1, 1)
 
 <QuizScreen>:
     quizbox: quizbox
