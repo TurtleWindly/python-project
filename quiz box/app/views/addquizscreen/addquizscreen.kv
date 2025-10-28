@@ -1,0 +1,54 @@
+<AddQuizScreen>:
+    name: "add_quiz_screen"
+
+    MDLabel:
+        text: "Thêm câu hỏi mới"
+        halign: "center"
+        font_style: "H4"
+        size_hint_y: None
+        height: self.texture_size[1]
+        padding_y: dp(20)
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(12)
+        MDTextField:
+            id: question_text
+            hint_text: "Câu hỏi"
+            mode: "rectangle"
+            size_hint_y: None
+            height: dp(100)
+            multiline: True
+        MDTextField:
+            id: answer_text
+            hint_text: "Đáp án"
+            mode: "rectangle"
+            size_hint_y: None
+            height: dp(56)
+        MDTextField:
+            id: option1_text
+            hint_text: "Lựa chọn 1"
+            mode: "rectangle"
+            size_hint_y: None
+            height: dp(56)
+        MDTextField:
+            id: option2_text
+            hint_text: "Lựa chọn 2"
+            mode: "rectangle"
+            size_hint_y: None
+            height: dp(56)
+        MDTextField:
+            id: option3_text
+            hint_text: "Lựa chọn 3"
+            mode: "rectangle"
+            size_hint_y: None
+            height: dp(56)
+        MDRaisedButton:
+            text: "Thêm câu hỏi"
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: app.theme_cls.primary_color
+            text_color: 1, 1, 1, 1
+            size_hint: None, None
+            size: dp(160), dp(44)
+            on_release:
+                app.root.ids.screen_manager.current = 'home_screen'

@@ -28,6 +28,13 @@
                 icon: "video"
 
         OneLineAvatarListItem:
+            text: "Thêm câu hỏi"
+            on_release:
+                app.root.ids.screen_manager.current = "add_quiz_screen"
+            IconLeftWidget:
+                icon: "plus-box"
+
+        OneLineAvatarListItem:
             text: "Cài đặt"
             on_release:
                 app.root.ids.screen_manager.current = "setting_screen"
