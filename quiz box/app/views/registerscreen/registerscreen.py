@@ -1,11 +1,11 @@
-from kivy.app import App
-from kivy.uix.screenmanager import Screen
+from kivymd.app import MDApp
+from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty
 
 from app.user import User
 
 
-class RegisterScreen(Screen):
+class RegisterScreen(MDScreen):
     name = "quiz_register_screen"
 
     # expose the id widgets to python if you want to access them via attributes
@@ -14,9 +14,9 @@ class RegisterScreen(Screen):
 
     # prefer a clearer method name, but reg is fine
     def register_user(self):
-        app = App.get_running_app()
-        name: str = self.name_text.text_input.text
-        unit: str = self.unit_text.text_input.text
+        app = MDApp.get_running_app()
+        name: str = self.name_text.text
+        unit: str = self.unit_text.text
 
         if not name and not unit:
             # TODO: Create a popup to inform the user

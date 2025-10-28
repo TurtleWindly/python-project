@@ -1,9 +1,9 @@
 import json
 import random
-from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import Screen
+from kivymd.uix.button import MDRectangleFlatButton as Button
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
 number_of_questions = 10
@@ -21,7 +21,7 @@ class AnswerButton(Button):
     tag = StringProperty("")  # Property để lưu nhãn đáp án (A, B, C, D)
 
 
-class QuizBox(BoxLayout):
+class QuizBox(MDBoxLayout):
     # Khai báo property để bind tới button trong KV
     question_label = ObjectProperty(None)
     answer_btn1 = ObjectProperty(None)
@@ -53,7 +53,7 @@ class QuizBox(BoxLayout):
             buttons[index].tag = key
             buttons[index].is_correct = True if key == question["answer"] else False
 
-    def check_answer(self, app: App, selected_answer):
+    def check_answer(self, app: MDApp, selected_answer):
         """Hàm kiểm tra đáp án"""
         app.current_user.score += 1 if selected_answer else 0
         self.parent.answered_question += 1
@@ -65,7 +65,7 @@ class QuizBox(BoxLayout):
             result = app.db.add_result(
                 app.current_user.name, app.current_user.unit, app.current_user.score
             )
-            app.root.current = "result_screen"
+            app.root.ids.screen_manager.current = "result_screen"
 
         if selected_answer:
             self.set_question(random.choice(questions_data))
@@ -80,14 +80,14 @@ class QuizBox(BoxLayout):
         self.set_question(new_question)
 
 
-class QuizScreen(Screen):
+class QuizScreen(MDScreen):
     name = "quiz_screen"
     quizbox = ObjectProperty(None)
     answered_question = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.app = App.get_running_app()
+        self.app = MDApp.get_running_app()
 
     def on_enter(self):
         self.quizbox.set_question(questions_data[0])

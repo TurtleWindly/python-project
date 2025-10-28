@@ -1,54 +1,28 @@
 <SettingScreen>:
-    BoxLayout:
+    MDBoxLayout:
         orientation: "vertical"
         padding: 20
         spacing: 20
 
-        BoxLayout:
-            orientation: "horizontal"
+        MDTextField:
+            id: max_question
+            hint_text: "Maximum Questions per Quiz"
+            text: str(root.max_question_text)
+            font_size: '18sp'
+            multiline: False
+            input_filter: 'int'
+            on_text_validate:
+                root.max_question_text = int(self.text) if self.text.isdigit() else 10
+                root.save()
+
+        MDSlider:
+            id: volume
+            hint: True
             size_hint_y: None
-            height: "40dp"
-            Label:
-                text: "Max Questions:"
-                font_size: '18sp'
-                size_hint_x: 0.6
-            TextInput:
-                id: max_question
-                text: str(root.max_question_text)
-                font_size: '18sp'
-                size_hint_x: 0.4
-                multiline: False
-                input_filter: 'int'
-                on_text_validate:
-                    root.max_question_text = int(self.text) if self.text.isdigit() else 10
-                    root.save()
-
-        BoxLayout:
-            orientation: "horizontal"
-            size_hint_y: None
-            height: "40dp"
-
-            Label:
-                text: "Volume:"
-                font_size: '18sp'
-                size_hint_x: 0.6
-
-            # TODO: Make this a slider instead of a text input with KivyMD
-            TextInput:
-                id: volume
-                text: str(root.volume_text)
-                font_size: '18sp'
-                size_hint_x: 0.4
-                multiline: False
-                input_filter: 'float'
-                on_text_validate:
-                    root.volume_text = float(self.text) if self.text.replace('.','',1).isdigit() else 1.0
-                    root.save()
-
-        Button:
-            text: "Back to Main Menu"
-            font_size: '20sp'
-            size_hint_y: None
-            height: "50dp"
-            on_release:
-                app.root.current = "home_screen"
+            height: dp(10)
+            value: int(root.volume * 100)
+            on_value:
+                root.volume = self.value / 100.0
+                root.save()
+                # root.value = float(self.text) if self.text.replace('.','',1).isdigit() else 1.0
+                # root.save()

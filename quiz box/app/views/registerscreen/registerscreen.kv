@@ -4,18 +4,60 @@
     name_text: name_text
     unit_text: unit_text
 
-    BoxLayout:
+    MDBoxLayout:
         orientation: "vertical"
+        halign: "center"
+        padding: dp(16)
+        spacing: dp(12)
 
-        InputForm:
-            id: name_text
-            label_text: "Tên của bạn:"
+        MDCard:
+            size_hint: .92, .5
+            height: dp(360)
+            pos_hint: {"center_x": .5}
+            radius: [12,]
+            padding: dp(12)
 
-        InputForm:
-            id: unit_text
-            label_text: "Đơn vị của bạn:"
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(30)
+                center_y: self.parent.center_y
+                center_x: self.parent.center_x
 
-        Button:
-            text: "Làm bài kiểm tra"
-            size_hint: 1, 0.2
-            on_release: root.register_user()
+                MDTextField:
+                    id: name_text
+                    hint_text: "Họ và tên"
+                    mode: "rectangle"
+                    icon_left: "account"
+                    size_hint_y: None
+                    height: dp(56)
+                    helper_text: "Nhập họ tên đầy đủ"
+                    helper_text_mode: "on_focus"
+
+                MDTextField:
+                    id: unit_text
+                    hint_text: "Đơn vị"
+                    mode: "rectangle"
+                    icon_left: "office-building"
+                    size_hint_y: None
+                    height: dp(56)
+                    helper_text: "Tên đơn vị / lớp"
+                    helper_text_mode: "on_focus"
+                    md_bg_color: 1, 1, 1, 0.15  # nền sáng nhẹ (RGBA)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+
+                MDSeparator:
+                    height: dp(1)
+
+                MDRaisedButton:
+                    text: "Xác nhận"
+                    pos_hint: {"center_x": 0.5}
+                    md_bg_color: app.theme_cls.primary_color
+                    text_color: 1, 1, 1, 1
+                    size_hint: None, None
+                    size: dp(160), dp(44)
+                    on_release: root.register_user()
+
+
