@@ -169,3 +169,15 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+quiz box/data.db
+quiz box/res/pdf/bia.pdf
+quiz box/res/pdf/huong-dan-su-dung-tieng-viet.pdf
+quiz box/res/pdf/I-II.pdf
+quiz box/res/pdf/phần mềm lái xe.pdf
+quiz box/res/pdf/tiêu đồ 5x5-pdfux-flipped.pdf
+quiz box/res/pdf/thumbs/Autocad 2018 Turtorial.png
+quiz box/res/pdf/thumbs/bia.png
+quiz box/res/pdf/thumbs/huong-dan-su-dung-tieng-viet.png
+quiz box/res/pdf/thumbs/I-II.png
+quiz box/res/pdf/thumbs/phần mềm lái xe.png
+quiz box/res/pdf/thumbs/tiêu đồ 5x5-pdfux-flipped.png
