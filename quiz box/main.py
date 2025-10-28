@@ -25,8 +25,12 @@ class MainApp(MDApp):
         self.db = QuizDatabase()
         self.settings = AppSettings()
         self.current_user = User("", "")
-        self.screen_history = []    # lưu stack của các màn hình trước
+        self.screen_history = []  # lưu stack của các màn hình trước
         self._last_screen = None
+
+    def build(self):
+        self.theme_cls.primary_palette = "Teal"
+        self.theme_cls.theme_style = "Light"
 
     def on_start(self):
         # lấy reference tới MDScreenManager từ kv
@@ -44,7 +48,7 @@ class MainApp(MDApp):
         self._last_screen = value
         # cập nhật title của top bar (tùy theo tên màn hình)
         try:
-            title = value.replace('_', ' ').title()
+            title = value.replace("_", " ").title()
             self.root.ids.top_bar.title = title
         except Exception:
             pass
