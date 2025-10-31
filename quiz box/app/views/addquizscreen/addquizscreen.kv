@@ -1,49 +1,58 @@
 <AddQuizScreen>:
     name: "add_quiz_screen"
+    question_text: question_text
+    answer_text: answer_text
+    option1_text: option1_text
+    option2_text: option2_text
+    option3_text: option3_text
 
-    MDLabel:
-        text: "Thêm câu hỏi mới"
-        halign: "center"
-        font_style: "H4"
-        size_hint_y: None
-        height: self.texture_size[1]
-        padding_y: dp(20)
+        # size_hint_y: None
+        # height: self.texture_size[1]
+        # padding_y: dp(20)
+
     MDBoxLayout:
         orientation: "vertical"
         padding: dp(16)
         spacing: dp(12)
+
+        MDLabel:
+            text: "Thêm câu hỏi mới"
+            halign: "center"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            font_style: "H4"
+
         MDTextField:
             id: question_text
             hint_text: "Câu hỏi"
             mode: "rectangle"
-            size_hint_y: None
             height: dp(100)
             multiline: True
+
         MDTextField:
             id: answer_text
             hint_text: "Đáp án"
             mode: "rectangle"
-            size_hint_y: None
             height: dp(56)
+
         MDTextField:
             id: option1_text
             hint_text: "Lựa chọn 1"
             mode: "rectangle"
-            size_hint_y: None
             height: dp(56)
+
         MDTextField:
             id: option2_text
             hint_text: "Lựa chọn 2"
             mode: "rectangle"
-            size_hint_y: None
             height: dp(56)
+
         MDTextField:
             id: option3_text
             hint_text: "Lựa chọn 3"
             mode: "rectangle"
-            size_hint_y: None
             height: dp(56)
-        MDRaisedButton:
+
+        MDRectangleFlatButton:
             text: "Thêm câu hỏi"
             pos_hint: {"center_x": 0.5}
             md_bg_color: app.theme_cls.primary_color
