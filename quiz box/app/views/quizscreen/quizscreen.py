@@ -18,7 +18,7 @@ class AnswerButton(Button):
     """Custom Button để lưu thông tin đáp án"""
 
     is_correct = BooleanProperty(False)  # Property để đánh dấu đáp án đúng
-    tag = StringProperty("")  # Property để lưu nhãn đáp án (A, B, C, D)
+    tag = StringProperty("")  # Property để lưu nhãn đáp án (answer, option1, ...)
 
 
 class QuizBox(MDBoxLayout):
@@ -41,7 +41,7 @@ class QuizBox(MDBoxLayout):
         # Cập nhật câu hỏi
         self.question_label.text = question["question"]
         # Tạo list đáp án và xáo trộn
-        ans_keys = ["A", "B", "C", "D"]
+        ans_keys = ["answer", "option1", "option2", "option3"]
         ans = []
         for key in ans_keys:
             ans.append((key, question[key]))
@@ -62,7 +62,7 @@ class QuizBox(MDBoxLayout):
 
         if self.parent.answered_question >= app.settings.max_question:
             print(f"Chúc mừng {app.current_user.name}, bạn đã hoàn thành bài quiz!")
-            result = app.db.add_result(
+            app.db.add_result(
                 app.current_user.name, app.current_user.unit, app.current_user.score
             )
             app.root.ids.screen_manager.current = "result_screen"
@@ -84,6 +84,7 @@ class QuizScreen(MDScreen):
     name = "quiz_screen"
     quizbox = ObjectProperty(None)
     answered_question = 0
+    questions_data: list[dict] = questions_data
 
     def __init__(self, **kw):
         super().__init__(**kw)
