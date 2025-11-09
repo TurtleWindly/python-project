@@ -11,7 +11,7 @@ class ResultScreen(MDScreen):
     def on_enter(self, **kw):
         app = App.get_running_app()
 
-        self.score_label.text += str(app.current_user.score) + "/" + str(app.settings.max_question)
+        self.score_label.text = "Điểm của bạn: " + str(app.current_user.score) + "/" + str(app.settings.max_question)
 
         # Clear the score after displaying it
         app.current_user.score = 0
