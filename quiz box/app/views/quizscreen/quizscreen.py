@@ -11,7 +11,7 @@ grade = 0
 
 json_file = "questions.json"
 with open(json_file, "r", encoding="utf-8") as f:
-    questions_data: list[dict] = json.load(f)
+    questions_file: list[dict] = json.load(f)
 
 
 class AnswerButton(Button):
@@ -29,7 +29,7 @@ class QuizBox(MDBoxLayout):
     answer_btn3 = ObjectProperty(None)
     answer_btn4 = ObjectProperty(None)
 
-    def set_question(self, question: dict):
+    def set_question(self, question: dict, question_data: list[dict]):
         """Hàm cập nhật câu hỏi và đáp án"""
         # Lưu các button vào một list để dễ thao tác
         buttons = [
@@ -51,56 +51,71 @@ class QuizBox(MDBoxLayout):
         for index, (key, value) in enumerate(ans):
             buttons[index].text = value
             buttons[index].tag = key
-            buttons[index].is_correct = True if key == question["answer"] else False
+            buttons[index].is_correct = True if key == "answer" else False
+            print(buttons[index].is_correct)
 
-    def check_answer(self, app: MDApp, selected_answer):
+        # Remove used question from the list
+        question_data.remove(question)
+        print(len(question_data), "questions remaining.")
+
+    def check_answer(self, app: MDApp, selected_answer, questions_data: list[dict]):
         """Hàm kiểm tra đáp án"""
         app.current_user.score += 1 if selected_answer else 0
         self.parent.answered_question += 1
         print("Answered: " + str(self.parent.answered_question))
         print("Score: " + str(app.current_user.score))
 
+        # Check if quiz is over
         if self.parent.answered_question >= app.settings.max_question:
             print(f"Chúc mừng {app.current_user.name}, bạn đã hoàn thành bài quiz!")
             app.db.add_result(
                 app.current_user.name, app.current_user.unit, app.current_user.score
             )
+            # Reset quiz state
+            self.parent.answered_question = 0
+            app.current_user.score = 0
             app.root.ids.screen_manager.current = "result_screen"
 
         if selected_answer:
-            self.set_question(random.choice(questions_data))
+            self.set_question(random.choice(questions_data), questions_data)
         else:
             # TODO: Popup thông báo sai 1s rồi tự đóng
             print("Sai rồi!")
-            self.set_question(random.choice(questions_data))
-
-    def reset_quiz(self):
-        """Hàm đặt lại câu hỏi mới"""
-        new_question = random.choice(questions_data)
-        self.set_question(new_question)
+            self.set_question(random.choice(questions_data), questions_data)
 
 
 class QuizScreen(MDScreen):
     name = "quiz_screen"
     quizbox = ObjectProperty(None)
     answered_question = 0
-    questions_data: list[dict] = questions_data
+    questions_data: list[dict]
 
     def __init__(self, **kw):
         super().__init__(**kw)
         self.app = MDApp.get_running_app()
 
     def on_enter(self):
-        self.quizbox.set_question(questions_data[0])
+        self.questions_data = questions_file.copy()
+        self.quizbox.set_question(
+            random.choice(self.questions_data), self.questions_data
+        )
         self.quizbox.answer_btn1.bind(
-            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(
+                self.app, btn.is_correct, self.questions_data
+            )
         )
         self.quizbox.answer_btn2.bind(
-            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(
+                self.app, btn.is_correct, self.questions_data
+            )
         )
         self.quizbox.answer_btn3.bind(
-            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(
+                self.app, btn.is_correct, self.questions_data
+            )
         )
         self.quizbox.answer_btn4.bind(
-            on_release=lambda btn: self.quizbox.check_answer(self.app, btn.is_correct)
+            on_release=lambda btn: self.quizbox.check_answer(
+                self.app, btn.is_correct, self.questions_data
+            )
         )
