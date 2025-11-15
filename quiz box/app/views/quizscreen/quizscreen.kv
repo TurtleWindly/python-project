@@ -8,6 +8,28 @@
     # md_bg_color: app.theme_cls.primary_color
     # text_color: 1, 1, 1, 1
 
+<SwipeToEditCard>:
+    size_hint_y: None
+    height: content.height
+
+    MDCardSwipeLayerBox:
+        padding: dp(10)
+        MDIconButton:
+            icon: "delete"
+            pos_hint: {"center_y": 0.5}
+            on_release:
+                pass
+                # root.parent.parent.delete_question(root)
+
+    MDCardSwipeFrontBox:
+        OneLineListItem:
+            id: content
+            text: root.question_text
+            font_name: "res/fonts/Roboto.ttf"
+            on_release:
+                pass
+                # app.open_edit_quiz_screen(root)
+
 <QuizBox>
     orientation: "vertical"
 
@@ -138,3 +160,11 @@
             size: dp(160), dp(44)
             on_release:
                 self.parent.parent.add_quiz()
+
+<ListQuizScreen>:
+    name: "list_quiz_screen"
+    MDList:
+        id: quiz_list
+        size_hint_y: None
+        height: self.minimum_height
+        pos_hint: {"top": 1}

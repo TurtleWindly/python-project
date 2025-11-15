@@ -5,7 +5,7 @@ from kivy.properties import ObjectProperty
 
 from app.views.homescreen.homescreen import HomeScreen
 from app.views.registerscreen.registerscreen import RegisterScreen
-from app.views.quizscreen.quizscreen import QuizScreen, AddQuizScreen
+from app.views.quizscreen.quizscreen import QuizScreen, AddQuizScreen, ListQuizScreen
 from app.views.resultscreen.resultscreen import ResultScreen
 from app.views.pdfscreen.pdfscreen import PdfScreen
 from app.views.settingscreen.settingscreen import SettingScreen

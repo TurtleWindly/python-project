@@ -1,9 +1,9 @@
-import json
 import random
 from kivy.app import App
 from kivymd.uix.button import MDRectangleFlatButton as Button
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.card import MDCardSwipe
 from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
@@ -13,6 +13,10 @@ class AnswerButton(Button):
 
     is_correct = BooleanProperty(False)  # Property để đánh dấu đáp án đúng
     tag = StringProperty("")  # Property để lưu nhãn đáp án (answer, option1, ...)
+
+
+class SwipeToEditCard(MDCardSwipe):
+    question_text = StringProperty("")
 
 
 class QuizBox(MDBoxLayout):
@@ -102,6 +106,7 @@ class QuizScreen(MDScreen):
             self.quizbox.answer_btn4.bind(on_release=self._on_answer)
             self._bound = True
 
+
 class AddQuizScreen(MDScreen):
     name = "add_quiz_screen"
 
@@ -132,4 +137,18 @@ class AddQuizScreen(MDScreen):
         app.question_manager.add(new_question)
         app.root.ids.screen_manager.current = "home_screen"
 
-        # print("Question added successfully!")
+
+class ListQuizScreen(MDScreen):
+    name = "list_quiz_screen"
+
+    def on_enter(self):
+        app = App.get_running_app()
+        question_manager = app.question_manager
+        question_list = self.ids.question_list
+        question_list.clear_widgets()
+
+        for question in question_manager.get_all():
+            card = SwipeToEditCard(
+                question_text=question["question"],
+            )
+            question_list.add_widget(card)

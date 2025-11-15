@@ -28,6 +28,13 @@
                 icon: "video"
 
         OneLineAvatarListItem:
+            text: "Danh sách câu hỏi"
+            on_release:
+                app.root.ids.screen_manager.current = "list_quiz_screen"
+            IconLeftWidget:
+                icon: "format-list-bulleted"
+
+        OneLineAvatarListItem:
             text: "Thêm câu hỏi"
             on_release:
                 app.root.ids.screen_manager.current = "add_quiz_screen"
