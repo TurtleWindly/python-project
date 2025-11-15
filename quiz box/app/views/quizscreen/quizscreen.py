@@ -6,13 +6,6 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.screen import MDScreen
 from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
 
-number_of_questions = 10
-grade = 0
-
-json_file = "questions.json"
-with open(json_file, "r", encoding="utf-8") as f:
-    questions_file: list[dict] = json.load(f)
-
 
 class AnswerButton(Button):
     """Custom Button để lưu thông tin đáp án"""
@@ -68,7 +61,6 @@ class QuizBox(MDBoxLayout):
             )
             # Reset quiz state
             self.parent.answered_question = 0
-            app.current_user.score = 0
             app.root.ids.screen_manager.current = "result_screen"
             return
 
@@ -96,7 +88,7 @@ class QuizScreen(MDScreen):
         self.quizbox.check_answer(self.app, btn.is_correct, self.questions_data)
 
     def on_enter(self):
-        self.questions_data = questions_file.copy()
+        self.questions_data = self.app.question_manager.get_all().copy()
         self.quizbox.set_question(
             random.choice(self.questions_data), self.questions_data
         )
