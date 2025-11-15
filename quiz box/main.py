@@ -15,6 +15,7 @@ from app.database import QuizDatabase
 
 from app.user import User
 from app.setting import AppSettings
+from app.questions import QuestionManager
 
 
 # Create the manage
@@ -41,6 +42,7 @@ class MainApp(MDApp):
         self._last_screen = self.screen_manager.current
         # bind để theo dõi thay đổi màn hình và cập nhật lịch sử
         self.screen_manager.bind(current=self._on_current)
+        self.question_manager = QuestionManager("questions.json")
 
     def _on_current(self, instance, value):
         # trước khi cập nhật _last_screen, nếu _last_screen tồn tại và khác giá trị mới
