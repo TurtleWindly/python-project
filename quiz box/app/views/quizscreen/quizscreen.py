@@ -1,5 +1,6 @@
 import json
 import random
+from kivy.app import App
 from kivymd.uix.button import MDRectangleFlatButton as Button
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -100,3 +101,35 @@ class QuizScreen(MDScreen):
             self.quizbox.answer_btn3.bind(on_release=self._on_answer)
             self.quizbox.answer_btn4.bind(on_release=self._on_answer)
             self._bound = True
+
+class AddQuizScreen(MDScreen):
+    name = "add_quiz_screen"
+
+    def add_quiz(self):
+        app = App.get_running_app()
+        question_text: str = self.ids.question_text.text
+        input_form = [
+            self.ids.answer_text.text,
+            self.ids.option1_text.text,
+            self.ids.option2_text.text,
+            self.ids.option3_text.text,
+        ]
+        if question_text == "":
+            print("Question cannot be empty.")
+            return
+        for item in input_form:
+            if item == "":
+                print("All answer options must be filled.")
+                return
+
+        new_question = {
+            "question": question_text.strip(),
+            "answer": self.ids.answer_text.text,
+            "option1": self.ids.option1_text.text,
+            "option2": self.ids.option2_text.text,
+            "option3": self.ids.option3_text.text,
+        }
+        app.question_manager.add(new_question)
+        app.root.ids.screen_manager.current = "home_screen"
+
+        # print("Question added successfully!")
