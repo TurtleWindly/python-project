@@ -52,22 +52,17 @@ class QuizBox(MDBoxLayout):
             buttons[index].text = value
             buttons[index].tag = key
             buttons[index].is_correct = True if key == "answer" else False
-            print(buttons[index].is_correct)
 
         # Remove used question from the list
         question_data.remove(question)
-        print(len(question_data), "questions remaining.")
 
     def check_answer(self, app: MDApp, selected_answer, questions_data: list[dict]):
         """Hàm kiểm tra đáp án"""
         app.current_user.score += 1 if selected_answer else 0
         self.parent.answered_question += 1
-        print("Answered: " + str(self.parent.answered_question))
-        print("Score: " + str(app.current_user.score))
 
         # Check if quiz is over
         if self.parent.answered_question >= app.settings.max_question:
-            print(f"Chúc mừng {app.current_user.name}, bạn đã hoàn thành bài quiz!")
             app.db.add_result(
                 app.current_user.name, app.current_user.unit, app.current_user.score
             )
@@ -75,6 +70,7 @@ class QuizBox(MDBoxLayout):
             self.parent.answered_question = 0
             app.current_user.score = 0
             app.root.ids.screen_manager.current = "result_screen"
+            return
 
         if selected_answer:
             self.set_question(random.choice(questions_data), questions_data)
@@ -93,29 +89,22 @@ class QuizScreen(MDScreen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.app = MDApp.get_running_app()
+        self._bound = False  # tránh bind nhiều lần
+
+    def _on_answer(self, btn):
+        # handler chung cho tất cả button
+        self.quizbox.check_answer(self.app, btn.is_correct, self.questions_data)
 
     def on_enter(self):
         self.questions_data = questions_file.copy()
         self.quizbox.set_question(
             random.choice(self.questions_data), self.questions_data
         )
-        self.quizbox.answer_btn1.bind(
-            on_release=lambda btn: self.quizbox.check_answer(
-                self.app, btn.is_correct, self.questions_data
-            )
-        )
-        self.quizbox.answer_btn2.bind(
-            on_release=lambda btn: self.quizbox.check_answer(
-                self.app, btn.is_correct, self.questions_data
-            )
-        )
-        self.quizbox.answer_btn3.bind(
-            on_release=lambda btn: self.quizbox.check_answer(
-                self.app, btn.is_correct, self.questions_data
-            )
-        )
-        self.quizbox.answer_btn4.bind(
-            on_release=lambda btn: self.quizbox.check_answer(
-                self.app, btn.is_correct, self.questions_data
-            )
-        )
+
+        # bind chỉ một lần
+        if not self._bound:
+            self.quizbox.answer_btn1.bind(on_release=self._on_answer)
+            self.quizbox.answer_btn2.bind(on_release=self._on_answer)
+            self.quizbox.answer_btn3.bind(on_release=self._on_answer)
+            self.quizbox.answer_btn4.bind(on_release=self._on_answer)
+            self._bound = True
