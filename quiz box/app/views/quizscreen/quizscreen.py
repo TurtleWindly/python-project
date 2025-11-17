@@ -144,11 +144,11 @@ class ListQuizScreen(MDScreen):
     def on_enter(self):
         app = App.get_running_app()
         question_manager = app.question_manager
-        question_list = self.ids.question_list
-        question_list.clear_widgets()
+        quiz_list = self.ids.quiz_list
+        quiz_list.clear_widgets()
 
         for question in question_manager.get_all():
             card = SwipeToEditCard(
                 question_text=question["question"],
             )
-            question_list.add_widget(card)
+            quiz_list.add_widget(card)
