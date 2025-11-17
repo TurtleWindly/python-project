@@ -18,17 +18,19 @@
             icon: "delete"
             pos_hint: {"center_y": 0.5}
             on_release:
-                pass
-                # root.parent.parent.delete_question(root)
+                print("Delete question:", root.question_text)
+
+        MDIconButton:
+            icon: "pencil"
+            pos_hint: {"center_y": 0.5}
+            on_release:
+                print("edittt question:", root.question_text)
 
     MDCardSwipeFrontBox:
         OneLineListItem:
             id: content
             text: root.question_text
             font_name: "res/fonts/Roboto.ttf"
-            on_release:
-                pass
-                # app.open_edit_quiz_screen(root)
 
 <QuizBox>
     orientation: "vertical"
@@ -43,7 +45,6 @@
 
     MDLabel:
         id: question_label
-        text: "Câu hỏi sẽ hiển thị ở đây"
         font_name: "res/fonts/Roboto.ttf"
         halign: "center"
         size_hint_y: None
@@ -60,7 +61,6 @@
 
             AnswerButton:
                 id: answer_btn1
-                text: "Đáp án 1"
                 halign: "center"
                 text_size: self.width, None
                 size_hint: (1, 1)
@@ -68,7 +68,6 @@
             # Đáp án 2
             AnswerButton:
                 id: answer_btn2
-                text: "Đáp án 2"
                 halign: "center"
                 text_size: self.width, None
                 size_hint: (1, 1)
@@ -79,7 +78,6 @@
 
             AnswerButton:
                 id: answer_btn3
-                text: "Đáp án 3"
                 halign: "center"
                 text_size: self.width, None
                 size_hint: (1, 1)
@@ -87,7 +85,6 @@
             # Đáp án 4
             AnswerButton:
                 id: answer_btn4
-                text: "Đáp án 4"
                 halign: "center"
                 text_size: self.width, None
                 size_hint: (1, 1)
@@ -163,8 +160,10 @@
 
 <ListQuizScreen>:
     name: "list_quiz_screen"
-    MDList:
-        id: quiz_list
-        size_hint_y: None
-        height: self.minimum_height
-        pos_hint: {"top": 1}
+
+    MDScrollView:
+        MDList:
+            id: quiz_list
+            size_hint_y: None
+            height: self.minimum_height
+            pos_hint: {"top": 1}
