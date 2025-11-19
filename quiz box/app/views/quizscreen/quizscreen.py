@@ -160,3 +160,39 @@ class ListQuizScreen(MDScreen):
         question_manager = app.question_manager
         question_manager.delete(int(qid))
         self.on_enter()  # Refresh the list
+
+
+class EditQuizScreen(MDScreen):
+    name = "edit_quiz_screen"
+
+    def on_enter(self):
+        app = App.get_running_app()
+        # app.question_manager.get_by_id(int(self.ids.question_id.text))
+        # self.ids.question_text.text = 
+
+    def save_quiz(self):
+        app = App.get_running_app()
+        question_text: str = self.ids.question_text.text
+        input_form = [
+            self.ids.answer_text.text,
+            self.ids.option1_text.text,
+            self.ids.option2_text.text,
+            self.ids.option3_text.text,
+        ]
+        if question_text == "":
+            print("Question cannot be empty.")
+            return
+        for item in input_form:
+            if item == "":
+                print("All answer options must be filled.")
+                return
+
+        new_question = {
+            "question": question_text.strip(),
+            "answer": self.ids.answer_text.text,
+            "option1": self.ids.option1_text.text,
+            "option2": self.ids.option2_text.text,
+            "option3": self.ids.option3_text.text,
+        }
+        app.question_manager.add(new_question)
+        app.root.ids.screen_manager.current = "home_screen"

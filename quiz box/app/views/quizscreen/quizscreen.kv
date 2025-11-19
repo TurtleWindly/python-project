@@ -5,8 +5,7 @@
     halign: "center"
     font_size: "18sp"
     size_hint_x: 1
-    # md_bg_color: app.theme_cls.primary_color
-    # text_color: 1, 1, 1, 1
+
 
 <SwipeToEditCard>:
     size_hint_y: None
@@ -32,6 +31,7 @@
             id: content
             text: root.question_text
             font_name: "res/fonts/Roboto.ttf"
+
 
 <QuizBox>
     orientation: "vertical"
@@ -90,10 +90,12 @@
                 text_size: self.width, None
                 size_hint: (1, 1)
 
+
 <QuizScreen>:
     quizbox: quizbox
     QuizBox:
         id: quizbox
+
 
 <AddQuizScreen>:
     name: "add_quiz_screen"
@@ -102,10 +104,6 @@
     option1_text: option1_text
     option2_text: option2_text
     option3_text: option3_text
-
-        # size_hint_y: None
-        # height: self.texture_size[1]
-        # padding_y: dp(20)
 
     MDBoxLayout:
         orientation: "vertical"
@@ -159,6 +157,7 @@
             on_release:
                 self.parent.parent.add_quiz()
 
+
 <ListQuizScreen>:
     name: "list_quiz_screen"
 
@@ -168,3 +167,64 @@
             size_hint_y: None
             height: self.minimum_height
             pos_hint: {"top": 1}
+
+
+<EditQuizScreen>:
+    name: "edit_quiz_screen"
+    question_text: question_text
+    answer_text: answer_text
+    option1_text: option1_text
+    option2_text: option2_text
+    option3_text: option3_text
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(16)
+        spacing: dp(12)
+
+        MDLabel:
+            text: "Thêm câu hỏi mới"
+            halign: "center"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            font_style: "H4"
+
+        MDTextField:
+            id: question_text
+            hint_text: "Câu hỏi"
+            mode: "rectangle"
+            height: dp(100)
+            multiline: True
+
+        MDTextField:
+            id: answer_text
+            hint_text: "Đáp án"
+            mode: "rectangle"
+            height: dp(56)
+
+        MDTextField:
+            id: option1_text
+            hint_text: "Lựa chọn 1"
+            mode: "rectangle"
+            height: dp(56)
+
+        MDTextField:
+            id: option2_text
+            hint_text: "Lựa chọn 2"
+            mode: "rectangle"
+            height: dp(56)
+
+        MDTextField:
+            id: option3_text
+            hint_text: "Lựa chọn 3"
+            mode: "rectangle"
+            height: dp(56)
+
+        MDRectangleFlatButton:
+            text: "Cập nhật câu hỏi"
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: app.theme_cls.primary_color
+            text_color: 1, 1, 1, 1
+            size_hint: None, None
+            size: dp(160), dp(44)
+            on_release:
+                self.parent.parent.edit_quiz()
