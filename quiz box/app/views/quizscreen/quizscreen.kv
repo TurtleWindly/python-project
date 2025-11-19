@@ -24,7 +24,8 @@
             icon: "pencil"
             pos_hint: {"center_y": 0.5}
             on_release:
-                print("edittt question:", root.question_id)
+                # root: SwipeToEditCard -> MDList -> MDScrollView -> Screen
+                root.parent.parent.parent.edit_quiz(root.question_id)
 
     MDCardSwipeFrontBox:
         OneLineListItem:
@@ -183,7 +184,7 @@
         spacing: dp(12)
 
         MDLabel:
-            text: "Thêm câu hỏi mới"
+            text: "Chỉnh sửa câu hỏi"
             halign: "center"
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             font_style: "H4"

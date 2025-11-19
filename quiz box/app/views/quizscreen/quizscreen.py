@@ -5,7 +5,7 @@ from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCardSwipe
 from kivymd.uix.screen import MDScreen
-from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
+from kivy.properties import ObjectProperty, StringProperty, BooleanProperty, NumericProperty
 
 
 class AnswerButton(Button):
@@ -161,16 +161,25 @@ class ListQuizScreen(MDScreen):
         question_manager.delete(int(qid))
         self.on_enter()  # Refresh the list
 
+    def edit_quiz(self, qid: str):
+        app = App.get_running_app()
+        question = app.question_manager.get_by_id(int(qid))
+        if question:
+            edit_screen = app.root.ids.screen_manager.get_screen("edit_quiz_screen")
+            edit_screen.question_id = question["id"]
+            edit_screen.ids.question_text.text = question["question"]
+            edit_screen.ids.answer_text.text = question["answer"]
+            edit_screen.ids.option1_text.text = question["option1"]
+            edit_screen.ids.option2_text.text = question["option2"]
+            edit_screen.ids.option3_text.text = question["option3"]
+            app.root.ids.screen_manager.current = "edit_quiz_screen"
+
 
 class EditQuizScreen(MDScreen):
     name = "edit_quiz_screen"
+    question_id = NumericProperty(0)
 
-    def on_enter(self):
-        app = App.get_running_app()
-        # app.question_manager.get_by_id(int(self.ids.question_id.text))
-        # self.ids.question_text.text = 
-
-    def save_quiz(self):
+    def edit_quiz(self):
         app = App.get_running_app()
         question_text: str = self.ids.question_text.text
         input_form = [
@@ -194,5 +203,5 @@ class EditQuizScreen(MDScreen):
             "option2": self.ids.option2_text.text,
             "option3": self.ids.option3_text.text,
         }
-        app.question_manager.add(new_question)
-        app.root.ids.screen_manager.current = "home_screen"
+        app.question_manager.update(self.question_id, new_question)
+        app.root.ids.screen_manager.current = "list_quiz_screen"
