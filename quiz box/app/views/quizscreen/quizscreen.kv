@@ -18,13 +18,14 @@
             icon: "delete"
             pos_hint: {"center_y": 0.5}
             on_release:
-                print("Delete question:", root.question_text)
+                # root: SwipeToEditCard -> MDList -> MDScrollView -> Screen
+                root.parent.parent.parent.delete_question(root.question_id)
 
         MDIconButton:
             icon: "pencil"
             pos_hint: {"center_y": 0.5}
             on_release:
-                print("edittt question:", root.question_text)
+                print("edittt question:", root.question_id)
 
     MDCardSwipeFrontBox:
         OneLineListItem:

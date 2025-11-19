@@ -17,6 +17,7 @@ class AnswerButton(Button):
 
 class SwipeToEditCard(MDCardSwipe):
     question_text = StringProperty("")
+    question_id = StringProperty("")
 
 
 class QuizBox(MDBoxLayout):
@@ -150,5 +151,12 @@ class ListQuizScreen(MDScreen):
         for question in question_manager.get_all():
             card = SwipeToEditCard(
                 question_text=question["question"],
+                question_id=str(question["id"]),
             )
             quiz_list.add_widget(card)
+
+    def delete_question(self, qid: str):
+        app = App.get_running_app()
+        question_manager = app.question_manager
+        question_manager.delete(int(qid))
+        self.on_enter()  # Refresh the list
